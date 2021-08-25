@@ -1,0 +1,7 @@
+.element__caption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 22px 0 31px 0;
+}

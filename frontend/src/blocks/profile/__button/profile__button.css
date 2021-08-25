@@ -1,0 +1,27 @@
+.profile__button {
+    cursor: pointer;
+    /* display: flex; */
+    margin-left: auto;
+    width: 150px;
+    height: 50px;
+    background-color: transparent;
+    border: 2px solid #FFF;
+    border-radius: 2px;
+    background-image: url(../../../images/profile-button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #FFF;
+}
+
+.profile__button:focus {
+    outline: none;
+}
+
+
+@media screen and (max-width: 730px) {
+    .profile__button {
+        width: 100%;
+        margin-top: 36px;
+        background-size: 16px;
+    }
+}

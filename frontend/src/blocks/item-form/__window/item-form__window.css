@@ -1,0 +1,23 @@
+.item-form__window {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    margin-top: -173px;
+    left: 50%;
+    margin-left: -215px;
+    width: 430px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 36px;
+    background-color: #FFF;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 520px) {
+    .item-form__window  {
+        /* top: 122px; */
+        padding: 0 22px;
+        width: 282px;
+        margin-left: -141px;
+    }
+}

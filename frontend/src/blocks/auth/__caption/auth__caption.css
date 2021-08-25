@@ -1,0 +1,12 @@
+.auth__caption {
+    margin: 15px 0 0;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.auth__caption:hover {
+    opacity: 0.6;
+}

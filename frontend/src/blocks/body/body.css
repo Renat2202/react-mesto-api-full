@@ -1,0 +1,16 @@
+.body {
+    min-height: 100vh;
+    background-color: #000;
+    position: relative;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+.body::before {
+    display: table;
+    content: "";
+}
+
+.body::after {
+    display: table;
+    content: "";
+}

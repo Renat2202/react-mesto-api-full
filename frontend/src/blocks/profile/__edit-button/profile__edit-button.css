@@ -1,0 +1,25 @@
+.profile__edit-button {
+    cursor: pointer;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-left: 18px;
+    background-image: url(../../../images/profile-edit-button.svg);
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center;
+    background-size: cover;
+    border: none;
+    vertical-align: super;
+}
+
+.profile__edit-button:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 500px) {
+    .profile__edit-button {
+        width: 18px;
+        height: 18px;
+    }
+}
