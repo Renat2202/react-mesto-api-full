@@ -44,7 +44,7 @@ class Api {
           headers: this.headers
         })
           .then(this._getServerResponse);
-      
+  
     }
 
     addCard(card) {
@@ -71,7 +71,7 @@ class Api {
     }
 
     deleteLike(cardId) {
-      return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+      return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
         headers: this.headers
       })
@@ -79,7 +79,7 @@ class Api {
     }
 
     addLike(cardId) {
-      return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+      return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
         headers: this.headers
       })
@@ -87,7 +87,7 @@ class Api {
     }
 
     changeLikeCardStatus(cardId, isLiked) {
-        if (!isLiked) {
+        if (isLiked) {
           return this.deleteLike(cardId);
         } else {
           return this.addLike(cardId);
@@ -98,9 +98,9 @@ class Api {
   
 
 const api = new Api({
-    baseUrl: 'http://renat-frontend.tk',
+    baseUrl: 'https://api.renat-frontend.tk',
     headers: {
-      authorization: "607af2b55075f80d4c2d0314",
+      authorization: `Bearer ${localStorage.getItem('token')}`,
       'Content-Type': 'application/json'
     }
   });

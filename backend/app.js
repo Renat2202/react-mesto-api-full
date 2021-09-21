@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -21,10 +22,22 @@ const limiter = rateLimit({
   max: 100, // limit each IP to 100 requests per windowMs
 });
 
+const corsOptions = {
+  origin: [
+    'https://www.renat-frontend.tk',
+    'https://renat-frontend.tk',
+    'http://renat-frontend.tk',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+};
+
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
-app.use(limiter);
+app.use('*', cors(corsOptions));
+
 app.use(helmet());
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
@@ -36,6 +49,15 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 // логгер запросов
 app.use(requestLogger);
+
+// лимитер
+app.use(limiter);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 // обработчики роутов
 app.post('/signin', validateSignIn, login);

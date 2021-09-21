@@ -22,7 +22,7 @@ module.exports.getUser = (req, res, next) => {
       if (user === null) {
         throw new NotFoundError('Пользователь по указанному _id не найден.');
       }
-      return res.status(200).send({ user });
+      return res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -39,7 +39,7 @@ module.exports.getCurrentUser = (req, res, next) => {
       if (user === null) {
         throw new NotFoundError('Пользователь с указанным id не найден');
       }
-      return res.status(200).send({ user });
+      return res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -65,7 +65,7 @@ module.exports.createUser = (req, res, next) => {
     }))
     .then((user) => {
       const newUser = Object.assign(user, { password: undefined });
-      res.status(201).send({ newUser });
+      res.status(201).send(newUser);
     })
     .catch((err) => {
       if (err.name === 'MongoError' && err.code === 11000) {
@@ -108,7 +108,7 @@ module.exports.updateUser = (req, res, next) => {
       if (user === null) {
         throw new NotFoundError('Пользователь по указанному _id не найден.');
       }
-      return res.status(200).send({ user });
+      return res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -132,7 +132,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
       if (user === null) {
         throw new NotFoundError('Пользователь по указанному _id не найден.');
       }
-      return res.status(200).send({ user });
+      return res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

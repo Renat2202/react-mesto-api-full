@@ -76,7 +76,7 @@
 
 
 
-export const BASE_URL = 'http://renat-frontend.tk';
+export const BASE_URL = 'https://api.renat-frontend.tk';
 
 const getServerResponse = (res) => {
   if (res.ok) {

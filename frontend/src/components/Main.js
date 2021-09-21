@@ -25,7 +25,7 @@ function Main(props) {
                 <button className="profile__button hovered" aria-label="Добавить новый элемент" onClick={onAddPlace}></button>
             </section>
             <section className="elements">
-            {props.cards.reverse().map((card) => (
+            {props.cards.map((card) => (
                 < Card key={card._id} onCardClick={props.onCardClick} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete} card={card}/>
                 ))}
             </section>

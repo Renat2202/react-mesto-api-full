@@ -33,7 +33,17 @@ function App() {
 
 
     React.useEffect(() => {
-        api.getUserInfo()
+
+        // if (!isLoggedIn) {
+        //     setCards([]);
+        //     setCurrentUser([]);
+        //     console.log('1');
+        //     console.log(isLoggedIn);
+        //     return
+        // }
+            console.log('2');
+            console.log(isLoggedIn);
+            api.getUserInfo()
             .then((user) => {
                 setCurrentUser(user);
             })
@@ -41,15 +51,15 @@ function App() {
                 console.log(`${err}`);
              });
 
-        api.getInitialCards()
-            .then((data) => {
-                setCards(data);
+            api.getInitialCards()
+            .then((cards) => {
+                setCards(cards.reverse());
             })
             .catch((err) => {
                 console.log(`${err}`);
             });
                 
-    }, []);
+    }, [isLoggedIn]);
 
     React.useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -57,7 +67,7 @@ function App() {
             checkTokenValidation(token)
             .then((res) => {
                 setLoggedIn(true);
-                setEmail(res.data.email);
+                setEmail(res.email);
                 history.push("/");
             })
             .catch((err) => {
@@ -69,10 +79,10 @@ function App() {
     
     function handleCardLike(card) {
         // Снова проверяем, есть ли уже лайк на этой карточке
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        const isLiked = card.likes.find(i => i === currentUser._id);
 
         // Отправляем запрос в API и получаем обновлённые данные карточки
-        api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+        api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
             setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
         })
         .catch((err) => {
@@ -167,18 +177,18 @@ function App() {
     function handleSignIn(data) {
         authorization(data)
         .then((res) => {
-            setLoggedIn(true);
-             
-            checkTokenValidation(res.token)
-            .then((res) => {
-                setEmail(res.data.email);  
-            })
-            .catch((err) => {
-                console.log(`${err}`);
-            });
-            console.log(res);
-            localStorage.setItem('token' , res.token);
-            history.push("/");
+            if (res.token) {
+                setLoggedIn(true);
+                checkTokenValidation(res.token)
+                .then((res) => {
+                    setEmail(res.email);
+                })
+                .catch((err) => {
+                    console.log(`${err}`);
+                });
+                localStorage.setItem('token' , res.token);
+                history.push('/');
+            }
         })
         .catch((err) => {
             console.log(`${err}`);
@@ -187,6 +197,10 @@ function App() {
 
     function handleSignOut() {
         localStorage.removeItem('token');
+
+        // setCurrentUser({});
+        // setCards([]);
+
         setLoggedIn(false);
     }
 
